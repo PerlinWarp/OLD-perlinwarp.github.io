@@ -2,7 +2,8 @@
 
 var x = 700;
 var y = 400;
-
+var b1 = new block(x,y,true);
+var b2 = new block(x,y,false);
 
 function setup() {
   var canvas = createCanvas(1400, 800);
@@ -12,26 +13,42 @@ function setup() {
 
 function draw(){
 	fill(255);
-	var one = random(0,1);
-	var two = random(0,1);
-	console.log(one,two)
-	if(one > 0.5){
-		x = x + 50;
-	
-	}else{
-		x = x - 50;
-	}
-	if(two > 0.5){
-		y = y + 50;
-	}else{
-		y = y - 50;
-	}
+	b1.move();
+	b2.move();
 
-	//Boundaries
-	if(x > width){x = width;}
-	if(x < 0){x = 0;}
-	if(y > height){y = height;}
-	if(y < 0){y = 0;}
-	fill(random(255),random(255),random(255));
-	rect(x,y,50,50);
+
+}
+
+function block(startx,starty,random){
+	this.random = random;
+	this.x = startx;
+	this.y = starty;
+	this.move = function(){
+		var one = Math.random();
+		var two = Math.random();
+		if(one > 0.5){
+			this.x = this.x + 10;
+		
+		}else{
+			this.x = this.x - 10;
+		}
+		if(two > 0.5){
+			this.y = this.y + 10;
+		}else{
+			this.y = this.y - 10;
+		}
+
+		//Boundaries
+		if(this.x > width){this.x = width;}
+		if(this.x < 0){this.x = 0;}
+		if(this.y > height){this.y = height;}
+		if(this.y < 0){this.y = 0;}
+		if(this.random == true){
+			fill(Math.random()*255);
+		}else{
+			fill(Math.random()*255,Math.random()*255,Math.random()*255);
+		}
+		rect(this.x,this.y,10,10);
+
+		}
 }
